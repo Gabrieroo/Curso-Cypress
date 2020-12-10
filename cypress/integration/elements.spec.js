@@ -28,8 +28,10 @@ describe("Elementos basicos", () => {
   });
   it('Campos de texto', () => {
 
-    cy.get('#formNome').type('Ola mundo');
-    cy.get('#formNome').should('have.value', 'Ola mundo');
+    const mail = `user${Date.now()}@mail.com`;
+
+    cy.get('#formNome').type(mail);
+    cy.get('#formNome');
 
     cy.get('#elementosForm\\:sugestoes').type('lorem inpusu sahfguhsaug hshaguhashghsa gusaugusuaghu sagosagashg').should('have.value', 'lorem inpusu sahfguhsaug hshaguhashghsa gusaugusuaghu sagosagashg');
     
@@ -47,10 +49,21 @@ describe("Elementos basicos", () => {
     cy.get("[name='formSexo']").should('have.length', 2);
       
   });
-  it.only('CheckBox', () => {
+  it('CheckBox', () => {
     cy.get('#formComidaPizza').click().should('be.checked');
     cy.get('[name=formComidaFavorita]').click({ multiple: true });
     cy.get('#formComidaCarne').should('be.checked');
     cy.get('#formComidaPizza').should('not.be.checked');
+  });
+  it.only('Combo', () => {
+    cy.get('[data-test=dataEscolaridade]').select('2o grau completo').should('have.value', '2graucomp');
+    cy.get('[data-test=dataEscolaridade]').select('2graucomp').should('have.value', '2graucomp');
+    cy.get('[data-test=dataEscolaridade]').should('not.be.value', '1grauincomp');
+    cy.get('[data-test=dataEscolaridade]').should('not.have.value', '1graucomp');
+    cy.get('[data-test=dataEscolaridade]').should('not.have.value', '2grauincomp');
+    cy.get('[data-test=dataEscolaridade]').should('not.have.value', 'superior');
+    cy.get('[data-test=dataEscolaridade]').should('not.have.value', 'especializacao');
+    cy.get('[data-test=dataEscolaridade]').should('not.have.value', 'mestrado');
+    cy.get('[data-test=dataEscolaridade]').should('not.have.value', 'Doutorado');
   });
 });
