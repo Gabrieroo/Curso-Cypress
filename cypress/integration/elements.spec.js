@@ -26,7 +26,7 @@ describe("Elementos basicos", () => {
     cy.contains("Voltou").click();
     cy.get("#resultado").should("have.text", "Status: Nao cadastrado");
   });
-  it.only('Campos de texto', () => {
+  it('Campos de texto', () => {
 
     cy.get('#formNome').type('Ola mundo');
     cy.get('#formNome').should('have.value', 'Ola mundo');
@@ -38,5 +38,13 @@ describe("Elementos basicos", () => {
     cy.get('[data-cy=dataSobrenome]').type('Sobre nomes{backspace}{backspace}').should('have.value', 'Sobre nom');
 
     cy.get('#elementosForm\\:sugestoes').clear().type('Erro{selectall}acerto', {delay: 100}).should('have.value', 'acerto');
+  });
+
+  it.only('Radio button', () => {
+
+    cy.get('#formSexoFem').click().should('be.checked');
+    cy.get('#formSexoMasc').should('not.be.checked');
+    cy.get("[name='formSexo']").should('have.length', 2);
+      
   });
 });
