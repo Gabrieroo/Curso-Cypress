@@ -55,8 +55,7 @@ describe("Elementos basicos", () => {
     cy.get('#formComidaCarne').should('be.checked');
     cy.get('#formComidaPizza').should('not.be.checked');
   });
-  it.only('Combo', () => {
-    cy.get('[data-test=dataEscolaridade]').select('2o grau completo').should('have.value', '2graucomp');
+  it('Combo', () => {
     cy.get('[data-test=dataEscolaridade]').select('2graucomp').should('have.value', '2graucomp');
     cy.get('[data-test=dataEscolaridade]').should('not.be.value', '1grauincomp');
     cy.get('[data-test=dataEscolaridade]').should('not.have.value', '1graucomp');
@@ -65,5 +64,14 @@ describe("Elementos basicos", () => {
     cy.get('[data-test=dataEscolaridade]').should('not.have.value', 'especializacao');
     cy.get('[data-test=dataEscolaridade]').should('not.have.value', 'mestrado');
     cy.get('[data-test=dataEscolaridade]').should('not.have.value', 'Doutorado');
+  });
+  it.only('Combo multiplo', () => {
+    cy.get('[data-testid=dataEsportes]').select(['natacao','Corrida','nada']);
+    cy.get('[value="natacao"]').should('be.selected')
+    cy.get('[value="futebol"]').should('not.be.selected')
+    cy.get('[value="Corrida"]').should('be.selected')
+    cy.get('[value="Karate"]').should('not.be.selected')
+    cy.get('[value="nada"]').should('be.selected')
+
   });
 });
