@@ -40,11 +40,17 @@ describe("Elementos basicos", () => {
     cy.get('#elementosForm\\:sugestoes').clear().type('Erro{selectall}acerto', {delay: 100}).should('have.value', 'acerto');
   });
 
-  it.only('Radio button', () => {
+  it('Radio button', () => {
 
     cy.get('#formSexoFem').click().should('be.checked');
     cy.get('#formSexoMasc').should('not.be.checked');
     cy.get("[name='formSexo']").should('have.length', 2);
       
+  });
+  it.only('CheckBox', () => {
+    cy.get('#formComidaPizza').click().should('be.checked');
+    cy.get('[name=formComidaFavorita]').click({ multiple: true });
+    cy.get('#formComidaCarne').should('be.checked');
+    cy.get('#formComidaPizza').should('not.be.checked');
   });
 });
