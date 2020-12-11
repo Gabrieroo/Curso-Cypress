@@ -67,4 +67,5 @@ describe("Helpers", () => {
 
       cy.get('#resultado').invoke('html', '<input type="button", value="hached!"/>');
   });
+
 });

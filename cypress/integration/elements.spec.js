@@ -65,38 +65,53 @@ describe("Elementos basicos", () => {
     cy.get("#formComidaPizza").should("not.be.checked");
   });
   it("Combo", () => {
-    cy.get("[data-test=dataEscolaridade]")
-      .select("2graucomp")
-      .should("have.value", "2graucomp");
-    cy.get("[data-test=dataEscolaridade]").should(
-      "not.be.value",
-      "1grauincomp"
-    );
-    cy.get("[data-test=dataEscolaridade]").should(
-      "not.have.value",
-      "1graucomp"
-    );
-    cy.get("[data-test=dataEscolaridade]").should(
-      "not.have.value",
-      "2grauincomp"
-    );
-    cy.get("[data-test=dataEscolaridade]").should("not.have.value", "superior");
-    cy.get("[data-test=dataEscolaridade]").should(
-      "not.have.value",
-      "especializacao"
-    );
-    cy.get("[data-test=dataEscolaridade]").should("not.have.value", "mestrado");
-    cy.get("[data-test=dataEscolaridade]").should(
-      "not.have.value",
-      "Doutorado"
-    );
+     cy.get("[data-test=dataEscolaridade]")
+       .select("2graucomp")
+    //   .should("have.value", "2graucomp");
+    // cy.get("[data-test=dataEscolaridade]").should(
+    //   "not.be.value",
+    //   "1grauincomp"
+    // );
+    // cy.get("[data-test=dataEscolaridade]").should(
+    //   "not.have.value",
+    //   "1graucomp"
+    // );
+    // cy.get("[data-test=dataEscolaridade]").should(
+    //   "not.have.value",
+    //   "2grauincomp"
+    // );
+    // cy.get("[data-test=dataEscolaridade]").should("not.have.value", "superior");
+    // cy.get("[data-test=dataEscolaridade]").should(
+    //   "not.have.value",
+    //   "especializacao"
+    // );
+    // cy.get("[data-test=dataEscolaridade]").should("not.have.value", "mestrado");
+    // cy.get("[data-test=dataEscolaridade]").should(
+    //   "not.have.value",
+    //   "Doutorado"
+    // );
+    //cy.get('[data-test=dataEscolaridade] option').should('have.length', 8);
+    cy.get('[data-test=dataEscolaridade] option').then(arr => {
+      const values = []
+      arr.each(function (){
+        values.push(this.innerHTML)
+      })
+      expect(values).not.to.include.members(["superior","mestrado","Doutorado"]);
+    })
   });
   it.only("Combo multiplo", () => {
-    cy.get("[data-testid=dataEsportes]").select(["natacao", "Corrida", "nada"]);
-    cy.get('[value="natacao"]').should("be.selected");
-    cy.get('[value="futebol"]').should("not.be.selected");
-    cy.get('[value="Corrida"]').should("be.selected");
-    cy.get('[value="Karate"]').should("not.be.selected");
-    cy.get('[value="nada"]').should("be.selected");
+     cy.get("[data-testid=dataEsportes]").select(["natacao", "Corrida", "nada"]);
+    // cy.get('[value="natacao"]').should("be.selected");
+    // cy.get('[value="futebol"]').should("not.be.selected");
+    // cy.get('[value="Corrida"]').should("be.selected");
+    // cy.get('[value="Karate"]').should("not.be.selected");
+    // cy.get('[value="nada"]').should("be.selected");
+
+    // cy.get("[data-testid=dataEsportes]").should('have.value', ['natacao', 'futebol', 'Corrida'] )
+    cy.get("[data-testid=dataEsportes]").then(temp => {
+      expect(temp.val()).to.be.deep.equal(["natacao", "Corrida", "nada"]);
+      expect(temp.val()).not.to.be.deep.equal(["Karate", "futebol"]);
+    })
+    cy.get("[data-testid=dataEsportes]").invoke('val').should('eql',["natacao", "Corrida", "nada"]);
   });
 });
