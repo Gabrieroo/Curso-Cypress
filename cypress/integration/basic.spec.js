@@ -9,6 +9,16 @@ describe("Cypress basics", () => {
       .should("to.be.equal", "Campo de Treinamento")
       .and("contain", "Campo")
       .debug();
+
+
+
+      cy.title().then( title =>{
+        console.log(title);
+      })
+
+      cy.title().should( title =>{
+        console.log(title);
+      })
   });
 
   it("Encontrar e interagir com um elemento", () => {

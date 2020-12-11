@@ -25,7 +25,7 @@ describe("Espera", () => {
     //cy.get('#lista li').find('span').should('contain','Item 2');
     cy.get("#lista li span").should("contain", "Item 2");
   });
-  it.only("Uso do timeOut", () => {
+  it("Uso do timeOut", () => {
     //    cy.get("#buttonDelay").click();
     //   cy.get('#novoCampo',{timeout: 1000}).should('not.exist');
 
@@ -33,10 +33,34 @@ describe("Espera", () => {
     //cy.wait(5000);
     //cy.get('#lista li span' , { timeout: 30000}).should('contain','Item 2');
 
-
     cy.get("#buttonListDOM").click();
-    cy.get('#lista li span', { timeout: 30000}).should('have.length', 1 );
-    cy.get('#lista li span', { timeout: 30000}).should('have.length', 2 );
+    cy.get("#lista li span", { timeout: 30000 }).should("have.length", 1);
+    cy.get("#lista li span", { timeout: 30000 }).should("have.length", 2);
+  });
+
+  it("Click retry", () => {
+    cy.get("#buttonCount").click().should("have.value", "1");
+    cy.get("#buttonCount").should("have.value", "11");
+    cy.get("#buttonCount").should("have.value", "111");
+  });
+
+  it.only("should vs then", () => {
+    // cy.get("#buttonListDOM").click();
+    // cy.get('#lista li span', { timeout: 30000}).then(el =>{
+    ////   expect(el).to.have.length(1)});
+
+    cy.get("#buttonListDOM")
+      .click()
+      .then((el) => {
+        expect(el).to.have.length(1);
+        return 2;
+      }).and('have.id', 'buttonListDOM');
+
+      cy.get("#buttonListDOM")
+      .click()
+      .then((el) => {
+        expect(el).to.have.length(1);
+        return 2;
+      }).and('eq',2).and('no.have.id', 'buttonListDOM');
   });
 });
- 
