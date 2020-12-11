@@ -56,7 +56,7 @@ describe("Alerts", () => {
         
     });
 
-    it.only('prompt', () => {
+    it('prompt', () => {
         // cy.get('#prompt').click();
 
         // cy.on('window:prompt', msg => {
@@ -73,6 +73,18 @@ describe("Alerts", () => {
         }).as('prompt');
 
         cy.get('#prompt').click();
+        
+    });
+
+    it.only('Desafio', () => {
+        cy.get('#formCadastrar').click()
+
+        const stub = cy.stub().as('alerta');
+        
+        cy.on('window:alert', stub);
+        console.log(stub);
+        
+
         
     });
 
