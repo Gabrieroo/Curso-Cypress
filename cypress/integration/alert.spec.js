@@ -25,7 +25,7 @@ describe("Alerts", () => {
         });
     });
 
-    it.only('Confirm', () => {
+    it('Confirm', () => {
         cy.get('#confirm').click();
 
         cy.on('window:confirm', msg => {
@@ -40,7 +40,7 @@ describe("Alerts", () => {
         
     });
 
-    it.only('deny', () => {
+    it('deny', () => {
         cy.get('#confirm').click();
 
         cy.on('window:confirm', msg => {
@@ -55,4 +55,25 @@ describe("Alerts", () => {
         })
         
     });
+
+    it.only('prompt', () => {
+        // cy.get('#prompt').click();
+
+        // cy.on('window:prompt', msg => {
+        //     console.log(msg);
+        //     expect(msg).to.be.equal('Confirm Simples');
+        // })
+
+        // // cy.on('window:alert', msg => {
+        // //     console.log(msg);
+        // //     expect(msg).to.be.equal('Confirmado');
+        // // })
+        cy.window().then(win => {
+            cy.stub(win , 'prompt').returns('42')
+        }).as('prompt');
+
+        cy.get('#prompt').click();
+        
+    });
+
 });
