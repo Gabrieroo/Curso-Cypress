@@ -107,4 +107,5 @@ describe("Alerts", () => {
     cy.get("#formCadastrar").click();
     cy.get("#resultado > :nth-child(1)").should("contain", "Cadastrado!");
   });
+
 });
