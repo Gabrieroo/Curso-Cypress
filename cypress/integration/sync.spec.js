@@ -48,19 +48,21 @@ describe("Espera", () => {
     // cy.get("#buttonListDOM").click();
     // cy.get('#lista li span', { timeout: 30000}).then(el =>{
     ////   expect(el).to.have.length(1)});
+    cy.get("#buttonListDOM")
+      .click()
+      .then((el) => {
+        expect(el).to.have.length(1);
+        return 2;
+      })
+      .and("have.id", "buttonListDOM");
 
     cy.get("#buttonListDOM")
       .click()
       .then((el) => {
         expect(el).to.have.length(1);
         return 2;
-      }).and('have.id', 'buttonListDOM');
-
-      cy.get("#buttonListDOM")
-      .click()
-      .then((el) => {
-        expect(el).to.have.length(1);
-        return 2;
-      }).and('eq',2).and('no.have.id', 'buttonListDOM');
+      })
+      .and("eq", 2)
+      .and("no.have.id", "buttonListDOM");
   });
 });
