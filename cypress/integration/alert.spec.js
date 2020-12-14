@@ -14,6 +14,9 @@ describe("Alerts", () => {
       expect(msg).to.be.equal("Alert Simples");
     });
   });
+  it.only('teste command alert', () => {
+    cy.clickAlert('#alert', 'Alert Simples')
+  });
   it("Alert com mock", () => {
     const stub = cy.stub().as("alerta");
 
@@ -71,7 +74,7 @@ describe("Alerts", () => {
     cy.get("#prompt").click();
   });
 
-  it.only("Desafio", () => {
+  it("Desafio", () => {
     const stub = cy.stub().as("alerta");
 
     cy.on("window:alert", stub);
