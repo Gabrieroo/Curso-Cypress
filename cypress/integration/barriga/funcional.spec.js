@@ -34,4 +34,15 @@ describe("Testes funcionais de uma aplicacao real", () => {
       "Conta atualizada com sucesso!"
     );
   });
+  it('Inserir conta com mesmo nome', () => {
+    cy.acessarContas({ timeout: 300000 });
+    cy.get(loc.CONTAS.NOME, { timeout: 300000 }).type('João barboso alterado');
+    cy.get(loc.CONTAS.BTN_SALVAR, { timeout: 300000 }).click();
+
+    cy.get(loc.MESSAGE, { timeout: 300000 }).should(
+        "contain",
+        "code 400"
+      );
+
+  });
 });
