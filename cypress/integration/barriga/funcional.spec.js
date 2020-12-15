@@ -23,7 +23,7 @@ describe("Testes funcionais de uma aplicacao real", () => {
 
     cy.get(".toast-message",{ timeout: 300000 }).should('contain', 'Bem vindo');
   });
-  it("", () => {
+  it("Inserir conta", () => {
     cy.get(".dropdown-toggle", { timeout: 300000 }).click();
     cy.get('[href="/contas"]', { timeout: 300000 }).click();
 
@@ -38,16 +38,17 @@ describe("Testes funcionais de uma aplicacao real", () => {
       .type("Joao barbosa")
       .should("have.value", "Joao barbosa");
 
-    const stub = cy.stub().as("alerta");
 
     cy.get(".btn", { timeout: 300000 }).click();
 
-    cy.on("window:alert", stub);
+    cy.get(".toast-message",{ timeout: 300000 }).should('contain', 'Conta inserida com sucesso');
 
-    cy.get("#alert", { timeout: 300000 })
-      .click()
-      .then(() => {
-        expect(stub.getCall(0)).to.be.calledWith("Alert Simples");
-      });
+
+  });
+
+  it("alterar conta", () => {
+      cy.xpath("//table//td[contains(., 'Joao barbosa')]/..//i[@class='far fa-edit']", { timeout: 300000 }).click();
+      cy.get('[data-test=nome]').clear().type('João barboso');
+
   });
 });
