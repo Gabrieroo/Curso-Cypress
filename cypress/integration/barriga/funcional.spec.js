@@ -45,4 +45,19 @@ describe("Testes funcionais de uma aplicacao real", () => {
       );
 
   });
+  it('Criar transacao', () => {
+      cy.get(loc.MENU.MOVIMENTACAO).click();
+      
+      cy.get(loc.MOVIMENTACAO.DESCRICAO).type('Desc');
+      cy.get(loc.MOVIMENTACAO.VALOR).type('127');
+      cy.get(loc.MOVIMENTACAO.INTERESSADO).type('inter');
+      cy.get(loc.MOVIMENTACAO.BTN_SALVAR).click();
+
+      cy.get(loc.MESSAGE, { timeout: 300000 }).should(
+        "contain",
+        "sucesso"
+      );
+      cy.get(loc.ESTRATO.LINHAS).should('contain', 'Desc').and('have.length', 7);
+      cy.xpath(loc.ESTRATO.XP_BUSCA_ELEMENTO).should('exist');
+  });
 });
