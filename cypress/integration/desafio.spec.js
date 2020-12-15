@@ -7,7 +7,7 @@ describe("Testes funcionais de uma aplicacao real", () => {
 
   it('Cadastrar conta', () => {
 
-    cy.url({ timeout: 300000 }).should('include', 'barrigareact.wcaquino.me/login');
+
 
 
     cy.get('[data-test="email"]').type('gabriel@teste.com').should('have.value', 'gabriel@teste.com');
