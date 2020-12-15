@@ -8,22 +8,9 @@ describe("Testes funcionais de uma aplicacao real", () => {
   });
 
   it("Login", () => {
-    cy.url({ timeout: 300000 }).should(
-      "include",
-      "barrigareact.wcaquino.me/login"
-    );
-
-    cy.get(loc.LOGIN.USER)
-      .type("gabriel@teste.com")
-      .should("have.value", "gabriel@teste.com");
-    cy.get(loc.LOGIN.PASSWORD)
-      .type("123456")
-      .should("have.value", "123456");
-    cy.get(loc.LOGIN.BTN_LOGIN, { timeout: 300000 }).click();
-
-    cy.url({ timeout: 300000 }).should("include", "barrigareact.wcaquino.me");
-
-    cy.get(loc.MESSAGE,{ timeout: 300000 }).should('contain', 'Bem vindo');
+      cy.login('gabriel@teste.com','123456');
+      cy.resetApp();
+    
   });
   it("Inserir conta", () => {
     cy.get(loc.MENU.SETTINGS, { timeout: 300000 }).click();
