@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-import loc from '../support/locators'
+import loc from './locators'
 
 
 Cypress.Commands.add('clickAlert', (locator, message) => {
@@ -40,12 +40,8 @@ Cypress.Commands.add('login', (user, passwd) => {
     "barrigareact.wcaquino.me/login"
   );
 
-  cy.get(loc.LOGIN.USER)
-    .type(user)
-    .should("have.value", user);
-  cy.get(loc.LOGIN.PASSWORD)
-    .type(passwd)
-    .should("have.value", passwd);
+  cy.get(loc.LOGIN.USER).type(user).should("have.value", user);
+  cy.get(loc.LOGIN.PASSWORD).type(passwd).should("have.value", passwd);
   cy.get(loc.LOGIN.BTN_LOGIN, { timeout: 300000 }).click();
 
   cy.url({ timeout: 300000 }).should("include", "barrigareact.wcaquino.me");
